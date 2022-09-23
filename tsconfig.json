@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2022",
+    "sourceMap": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "lib": ["esnext"],
+    "esModuleInterop": true,
+    "experimentalDecorators": true
+  }
+}
