@@ -1,6 +1,6 @@
 {
-  "name": "xlsx-algo",
-  "version": "1.0.0",
+  "name": "node-sheet",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
