@@ -19,6 +19,10 @@ class Worksheet {
     this._rows.push(row);
   }
 
+  public addRows(rows: Row[]): void {
+    rows.forEach((i) => this.addRow(i));
+  }
+
   get pageName(): string {
     return this._pageName;
   }
