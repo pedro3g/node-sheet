@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "ESNext",
     "target": "ES2022",
     "sourceMap": true,
     "outDir": "dist",
@@ -8,6 +8,9 @@
     "strict": true,
     "lib": ["esnext"],
     "esModuleInterop": true,
-    "experimentalDecorators": true
-  }
+    "experimentalDecorators": true,
+    "moduleResolution": "Node",
+    "declaration": true
+  },
+  "exclude": ["test"]
 }
