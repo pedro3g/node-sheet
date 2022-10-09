@@ -1,14 +1,26 @@
 {
   "name": "node-sheet",
-  "version": "0.1.2",
-  "description": "",
-  "main": "index.js",
+  "version": "0.2.3",
+  "description": "A simple option based on the exceljs library to create spreadsheets.",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "scripts": {
-    "start:dev": "ts-node --transpile-only src/index.ts"
+    "start:dev": "ts-node --transpile-only src/index.ts",
+    "build": "rm -rf dist/ && prettier --write src/ && npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc --module esnext --outDir dist/esm",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "xlsx",
+    "exceljs"
+  ],
+  "author": "Pedro Henrique <opedro3g@gmail.com>",
   "license": "ISC",
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
   "devDependencies": {
     "@types/node": "^18.7.17",
     "@typescript-eslint/eslint-plugin": "^5.37.0",

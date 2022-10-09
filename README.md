@@ -6,71 +6,177 @@
 ![Bitbucket open issues](https://img.shields.io/github/issues/pedro3g/node-sheet?style=for-the-badge)
 
 
-> Uma opção simples baseada na biblioteca exceljs para criar planilhas.
+> A simple option based on the exceljs library to create spreadsheets.
 
-### Alerta
+### Disclaimer
 
-O projeto ainda está em desenvolvimento e as próximas atualizações e não está apto a ser usado em projetos reais.
+The project is under development and is not fit to be used in real projects.
 
-## 💻 Pré-requisitos
+## 🚀 Installing node-sheet
 
-Antes de começar, verifique se você atendeu aos seguintes requisitos:
-* Você instalou a versão mais recente de `nodejs`
+To install the node-sheet, simply turn the command:
 
-## 🚀 Instalando node-sheet
-
-Para instalar o node-sheet, siga estas etapas:
-
-* Clone o repositório
-* Instale as depêndências usando `npm install`
-
-## ☕ Usando node-sheet
-
-Para usar node-sheet, siga estas etapas:
-
-Crie uma arquivo `index.ts` na pasta `src`
 ```
-import Workbook from './Workbook';
-import Worksheet from './Worksheet';
+npm install node-sheet
+```
+or
+```
+yarn add node-sheet
+```
+
+## ☕ Using node-sheet
+
+Here's an example of how to create a basic spreadsheet
+```
+import { Workbook, Worksheet } from 'node-sheet'
 
 void (async () => {
-  // crie uma instância da planilha
   const workbook = new Workbook();
+  const worksheet = new Worksheet('Test page');
 
-  // crie uma nova página
-  const worksheet = new Worksheet('Título da página');
+  worksheet.setColumns([
+    {
+      key: 'col-a',
+    },
+    {
+      key: 'col-b',
+    },
+    {
+      key: 'col-c',
+    },
+  ]);
 
-  // defina as colunas da sua planilha
-  worksheet.setColumns([{ key: 'col-a' }, { key: 'col-b' }, { key: 'col-c' }]);
+  worksheet.addRows([
+    {
+      'col-a': 'Column A',
+      'col-b': 'Column B',
+      'col-c': 'Column C',
+    },
+    {
+      'col-a': 'Column A',
+      'col-b': 'Column B',
+      'col-c': 'Column C',
+    },
+  ]);
 
-  // adicione uma nova linha
-  worksheet.addRow(['Coluna A', 'Coluna B', 'Coluna C']);
-
-  // adicione a nova página a planilha
   workbook.addWorksheet(worksheet);
 
-  // exporte sua planilha
-  await workbook.export('nome-da-planilha.xlsx');
+  await workbook.export('test-sheet.xlsx');
 })();
 
 ```
 
-Execute utilizando o comando `npm run start:dev`
+You can insert multiple pages into a worksheet. To create a new page, create a new page instance.
 
-## 📫 Contribuindo para node-sheet
-Para contribuir com node-sheet, siga estas etapas:
+```
+new Worksheet('Page name');
+```
+Define the columns that you will use in your worksheet with the setColumns method.
 
-1. Bifurque este repositório.
-2. Crie um branch: `git checkout -b <nome_branch>`.
-3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
-4. Suba as suas alterações: `git push`
-5. Crie a solicitação de pull.
+```
+const workbook = new Workbook();
+const worksheet = new Worksheet('Page name');
 
-Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+worksheet.setColumns([
+  {
+    key: 'col-a',
+    // You can explore some styles within the object
+    // but your implementation may contain bugs
+  },
+  {
+    key: 'col-b',
+  },
+  {
+    key: 'col-c',
+  },
+]);
+```
 
-## 🤝 Colaboradores
+After you define the columns, you can insert columns by setting the keys. Each key represents a cell in a row and is not required making the cell empty.
+```
+const workbook = new Workbook();
+const worksheet = new Worksheet('Page name');
 
-Agradecemos às seguintes pessoas que contribuíram para este projeto:
+worksheet.setColumns([
+  {
+    key: 'col-a',
+    // You can explore some styles within the object
+    // but your implementation may contain bugs
+  },
+  {
+    key: 'col-b',
+  },
+  {
+    key: 'col-c',
+  },
+]);
+
+worksheet.addRows([
+  {
+    'col-a': 'Column A',
+    'col-b': 'Column B',
+    'col-c': 'Column C',
+  },
+  {
+    'col-a': 'Column A',
+    'col-b': 'Column B',
+    'col-c': 'Column C',
+  },
+]);
+```
+
+After you insert all the rows you want, insert the page into the worksheet.
+```
+const workbook = new Workbook();
+const worksheet = new Worksheet('Page name');
+
+worksheet.setColumns([
+  {
+    key: 'col-a',
+    // You can explore some styles within the object
+    // but your implementation may contain bugs
+  },
+  {
+    key: 'col-b',
+  },
+  {
+    key: 'col-c',
+  },
+]);
+
+worksheet.addRows([
+  {
+    'col-a': 'Column A',
+    'col-b': 'Column B',
+    'col-c': 'Column C',
+  },
+  {
+    'col-a': 'Column A',
+    'col-b': 'Column B',
+    'col-c': 'Column C',
+  },
+]);
+
+workbook.addWorksheet(worksheet);
+
+// Export the spreadsheet
+await workbook.export('test-sheet.xlsx');
+```
+
+## 📫 Contributing to node-sheet
+To contribute node-sheet, follow these steps:
+
+1. Fork this repository.
+2. Create a branch: `git checkout -b <nome_branch>`.
+3. Make your changes and confirm them: `git commit -m '<mensagem_commit>'`
+4. Climb your changes: `git push`
+5. Create the pull request.
+
+Alternatively, see the GitHub documentation at [how to create a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+
+## 🤝 Contributors
+
+We thank the following people who contributed to this project:
 
 <table>
   <tr>
@@ -84,5 +190,3 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
     </td>
   </tr>
 </table>
-
-[⬆ Voltar ao topo](#nome-do-projeto)<br>
