@@ -1,4 +1,7 @@
-import Workbook from './Workbook';
-import Worksheet from './Worksheet';
+import Cell from './cell';
+import Column from './column';
+import Header from './header';
+import Workbook from './workbook';
+import Worksheet from './worksheet';
 
-export { Workbook, Worksheet };
+export { Cell, Column, Header, Workbook, Worksheet };

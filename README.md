@@ -1,4 +1,4 @@
-# NODE-SHEET
+# NODE-SHEET (beta)
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/pedro3g/node-sheet?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/pedro3g/node-sheet?style=for-the-badge)
@@ -6,187 +6,66 @@
 ![Bitbucket open issues](https://img.shields.io/github/issues/pedro3g/node-sheet?style=for-the-badge)
 
 
-> A simple option based on the exceljs library to create spreadsheets.
+> A simple way to create spreadsheets.
 
 ### Disclaimer
 
-The project is under development and is not fit to be used in real projects.
+It is not recommended to use this library in real projects.
 
-## 🚀 Installing node-sheet
+## Installing node-sheet
 
-To install the node-sheet, simply turn the command:
+Use one of the commands below to install the node-sheet:
 
 ```
 npm install node-sheet
-```
-or
-```
 yarn add node-sheet
+pnpm add node-sheet
 ```
 
-## ☕ Using node-sheet
+## Using node-sheet
 
-Here's an example of how to create a basic spreadsheet
+
+
+| Class     | Description |
+| --------- | ----------- |
+| Workbook  | Main class that manages the worksheet |
+| Worksheet | Class that manages each sheet page |
+| Column    | Class used to build each column of the worksheet |
+| Header    | Class used to add the headers of each column that is able to define patterns for all the cells of the column |
+| Cell      | Class used to insert rows to the column
+
+
+Here's how you can create a basic spreadsheet containing name, age and gender:
 ```
-import { Workbook, Worksheet } from 'node-sheet'
+const { Worksheet, Column, Header, Cell, Workbook } = require('node-sheet');
 
-void (async () => {
-  const workbook = new Workbook();
-  const worksheet = new Worksheet('Test page');
+const worksheet = new Worksheet('Page 1');  // Page 1 is the page name
 
-  worksheet.setColumns([
-    {
-      key: 'col-a',
-    },
-    {
-      key: 'col-b',
-    },
-    {
-      key: 'col-c',
-    },
-  ]);
-
-  worksheet.addRows([
-    {
-      'col-a': 'Column A',
-      'col-b': 'Column B',
-      'col-c': 'Column C',
-    },
-    {
-      'col-a': 'Column A',
-      'col-b': 'Column B',
-      'col-c': 'Column C',
-    },
-  ]);
-
-  workbook.addWorksheet(worksheet);
-
-  await workbook.export('test-sheet.xlsx');
-})();
-
-```
-
-You can insert multiple pages into a worksheet. To create a new page, create a new page instance.
-
-```
-new Worksheet('Page name');
-```
-Define the columns that you will use in your worksheet with the setColumns method.
-
-```
-const workbook = new Workbook();
-const worksheet = new Worksheet('Page name');
-
-worksheet.setColumns([
-  {
-    key: 'col-a',
-    // You can explore some styles within the object
-    // but your implementation may contain bugs
-  },
-  {
-    key: 'col-b',
-  },
-  {
-    key: 'col-c',
-  },
-]);
-```
-
-After you define the columns, you can insert columns by setting the keys. Each key represents a cell in a row and is not required making the cell empty.
-```
-const workbook = new Workbook();
-const worksheet = new Worksheet('Page name');
-
-worksheet.setColumns([
-  {
-    key: 'col-a',
-    // You can explore some styles within the object
-    // but your implementation may contain bugs
-  },
-  {
-    key: 'col-b',
-  },
-  {
-    key: 'col-c',
-  },
+worksheet.addColumns([
+  new Column({
+    header: new Header({ title: 'Name' }),
+    cells: [new Cell('John'), new Cell('Maria'), new Cell('Joseph')],
+  }),
+  new Column({
+    header: new Header({ title: 'Age' }),
+    cells: [new Cell(20), new Cell(30), new Cell(40)],
+  }),
+  new Column({
+    header: new Header({ title: 'Gender' }),
+    cells: [new Cell('Male'), new Cell('Female'), new Cell('Male')],
+  }),
 ]);
 
-worksheet.addRows([
-  {
-    'col-a': 'Column A',
-    'col-b': 'Column B',
-    'col-c': 'Column C',
-  },
-  {
-    'col-a': 'Column A',
-    'col-b': 'Column B',
-    'col-c': 'Column C',
-  },
-]);
+new Workbook().addWorksheet(worksheet).export('worksheet-name');
 ```
 
-After you insert all the rows you want, insert the page into the worksheet.
-```
-const workbook = new Workbook();
-const worksheet = new Worksheet('Page name');
+> Pay attention: the cells will be organized according to the order they are arranged in `cells`.
 
-worksheet.setColumns([
-  {
-    key: 'col-a',
-    // You can explore some styles within the object
-    // but your implementation may contain bugs
-  },
-  {
-    key: 'col-b',
-  },
-  {
-    key: 'col-c',
-  },
-]);
+the `export` method will create a sheet at the root named according to the string passed by parameter.
+The result will be a spreadsheet like this:
 
-worksheet.addRows([
-  {
-    'col-a': 'Column A',
-    'col-b': 'Column B',
-    'col-c': 'Column C',
-  },
-  {
-    'col-a': 'Column A',
-    'col-b': 'Column B',
-    'col-c': 'Column C',
-  },
-]);
-
-workbook.addWorksheet(worksheet);
-
-// Export the spreadsheet
-await workbook.export('test-sheet.xlsx');
-```
-
-## 📫 Contributing to node-sheet
-To contribute node-sheet, follow these steps:
-
-1. Fork this repository.
-2. Create a branch: `git checkout -b <nome_branch>`.
-3. Make your changes and confirm them: `git commit -m '<mensagem_commit>'`
-4. Climb your changes: `git push`
-5. Create the pull request.
-
-Alternatively, see the GitHub documentation at [how to create a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
-
-## 🤝 Contributors
-
-We thank the following people who contributed to this project:
-
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/pedro3g">
-        <img src="https://avatars3.githubusercontent.com/u/30221184" width="100px;" alt="Foto do Pedro Henrique no GitHub"/><br>
-        <sub>
-          <b>Pedro Henrique</b>
-        </sub>
-      </a>
-    </td>
-  </tr>
-</table>
+| Name   | Age | Gender |
+| ------ | --- | ------ |
+| John   | 20  | Male   |
+| Maria  | 30  | Female |
+| Joseph | 40  | Male   |

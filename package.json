@@ -1,7 +1,7 @@
 {
   "name": "node-sheet",
-  "version": "0.2.3",
-  "description": "A simple option based on the exceljs library to create spreadsheets.",
+  "version": "0.3.0-beta",
+  "description": "A simple way to create spreadsheets.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "scripts": {
