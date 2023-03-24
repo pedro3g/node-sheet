@@ -36,8 +36,13 @@ class Workbook {
   }
 
   async export(
-    worksheetName: string = randomBytes(8).toString('hex')
-  ): Promise<void> {
+    worksheetName: string = randomBytes(8).toString('hex'),
+    exportType: 'xlsx' | 'buffer'
+  ): Promise<Exceljs.Buffer | undefined> {
+    if (exportType === 'buffer') {
+      return await this.workbook.xlsx.writeBuffer();
+    }
+
     await this.workbook.xlsx.writeFile(
       worksheetName.endsWith('.xlsx') ? worksheetName : `${worksheetName}.xlsx`
     );

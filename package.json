@@ -1,6 +1,6 @@
 {
   "name": "node-sheet",
-  "version": "0.3.0-beta",
+  "version": "0.3.1-beta",
   "description": "A simple way to create spreadsheets.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
