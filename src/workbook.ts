@@ -37,7 +37,7 @@ class Workbook {
 
   async export(
     worksheetName: string = randomBytes(8).toString('hex'),
-    exportType: 'xlsx' | 'buffer'
+    exportType: 'xlsx' | 'buffer' = 'xlsx'
   ): Promise<Exceljs.Buffer | undefined> {
     if (exportType === 'buffer') {
       return await this.workbook.xlsx.writeBuffer();
